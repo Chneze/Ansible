@@ -1,0 +1,16 @@
+---
+- name: Apache server installed
+  hosts: web
+  become: true
+  tasks:
+
+  - name: Latest apache version installed
+    apt:
+      name: httpd
+      state: Latest
+  
+  - name: Apache enabled and running
+    service:
+      name: httpd
+      enabled: true
+      state: started
