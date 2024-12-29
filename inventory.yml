@@ -1,18 +1,22 @@
 
 all:
   
+  hosts:
+     web_server1:
+      ansible_host: 192.168.115.128
+      ansible_port: 22
+      ansible_ssh_user: ansible
+      ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+     db_server1:
+      ansible_host: 192.168.115.128
+      ansible_port: 22
+      ansible_ssh_user: ansible
+      ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+
   children:
- 
     web_servers:
-      server1:
-      ansible_host: 192.168.115.128
-      ansible_port: 22
-      ansible_ssh_user: ansible
-      ansible_ssh_private_key_file: ~/.ssh/id_ed25519
-  
+      hosts:
+        web_server1:
     db_servers:
-      db1:
-      ansible_host: 192.168.115.128
-      ansible_port: 22
-      ansible_ssh_user: ansible
-      ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+      hosts:
+        db_server1:
