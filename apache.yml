@@ -1,9 +1,8 @@
 ---
-- hosts: all
+- hosts: web_servers
   become: true
   
   tasks:
-
   - name: Latest apache version installed
     apt:
       name: apache2
@@ -14,3 +13,14 @@
       name: apache2
       enabled: true
       state: started
+
+- hosts: db_servers
+  become: true
+  tasks:
+  - name: Latest mysql version installed
+    package:
+      name: mysql-server
+      state: latest
+
+      
+
