@@ -63,3 +63,9 @@ myservers:
 
 - You can execute ansible as:
    ansible-playbook -i inventory.yml install_apache_playbook.yml
+
+
+
+## Running adhoc commands:
+ansible all -i inventory.yml -bK -m apt -a "name=ufw state=present"
+(-b : become yes, -K : ask become password)
