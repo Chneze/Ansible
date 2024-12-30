@@ -29,17 +29,31 @@ ssh-copy-id -i ~/.ssh/id_ed25519.pub ansible@192.168.115.128
 
 
 
-- Create inventory.yml file on the control machine. { This file consists of the hosts to be managed by ansible and their credentials.} 
+- Create inventory.yml file on the control machine. { This file consists of the hosts to be managed by ansible and their credentials.}
+- We can list all the servers, and then we can group the servers in to specific groups under the "children" section of the inventory file.
 
-myservers:
+all:
+  
   hosts:
-    server1:
+     web_server1:
       ansible_host: 192.168.115.128
       ansible_port: 22
       ansible_ssh_user: ansible
       ansible_ssh_private_key_file: ~/.ssh/id_ed25519
-    
-    server2:
+     db_server1:
+      ansible_host: 192.168.115.128
+      ansible_port: 22
+      ansible_ssh_user: ansible
+      ansible_ssh_private_key_file: ~/.ssh/id_ed25519
+
+  children:
+    web_servers:
+      hosts:
+        web_server1:
+    db_servers:
+      hosts:
+        db_server1:
+
 
 - Create playbooks that store the required instructions.
   e.g. install_apache_playbook.yml
